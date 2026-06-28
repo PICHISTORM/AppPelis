@@ -1,8 +1,10 @@
 <ion-content>
   <swiper-container>
    @for (pelicula of peliculasReciente; track pelicula.id){
-    <swiper-slide>
-      <h1> {{pelicula.backdrop_path}}</h1>
+    <swiper-slide [slidesPerView]="1.1"  [spaceBetween]="10" [freeMode]="true">
+      <ion-card>
+        <img [src]="pelicula.backdrop_path | imagen">
+      </ion-card>
     </swiper-slide>
    }
   </swiper-container>

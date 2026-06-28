@@ -4,6 +4,7 @@ import { ExploreContainerComponent } from '../explore-container/explore-containe
 import { Movies } from '../services/movies';
 import { Peliculas, RespuestaMDB } from '../interfaces/interfaces';
 import { register } from 'swiper/element/bundle';
+import { ImagenPipe } from '../pipes/imagen-pipe';
 
 register();
 
@@ -12,7 +13,7 @@ register();
   standalone:true,
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent, ExploreContainerComponent],
+  imports: [IonHeader, IonToolbar, IonTitle, IonContent, ExploreContainerComponent,ImagenPipe],
   schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })
 export class Tab1Page implements OnInit{
