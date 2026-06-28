@@ -1,0 +1,14 @@
+
+<!-- Configuramos el contenedor con las opciones del slider -->
+<swiper-container slides-per-view="3.3" space-between="10" free-mode="true">
+
+  @for (pelicula of peliculas; track pelicula.id) {
+    <swiper-slide>
+      <ion-card>
+        <img class="poster"
+        [src]="pelicula.poster_path | imagen">
+      </ion-card>
+    </swiper-slide>
+  }
+
+</swiper-container>

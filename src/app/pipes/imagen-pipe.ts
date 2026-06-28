@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
-
-const URL = 'https://image.tmdb.org/t/p';
+import { environment } from 'src/environments/environment';
+const URL = environment.imgPath;
 
 @Pipe({
   name: 'imagen',
@@ -13,7 +13,7 @@ export class ImagenPipe implements PipeTransform {
       return './assets/no-image-banner.png';
     }
     const imgUrl = `${URL}/${size}${img}`;
-    console.log('URL',imgUrl);
+    //console.log('URL',imgUrl);
     return imgUrl;
   }
 

@@ -1,4 +1,42 @@
 <ion-content>
+
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col>
+        <h3>Peliculas Recientes</h3>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+  <app-slideshow-backdrop [peliculas]="peliculasReciente"></app-slideshow-backdrop>
+
+
+
+    <ion-grid fixed>
+    <ion-row>
+      <ion-col>
+        <h3>Cartelera</h3>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <app-slideshow-poster [peliculas]="peliculasReciente"></app-slideshow-poster>
+
+
+      <ion-grid fixed>
+    <ion-row>
+      <ion-col>
+        <h3>Cartelera</h3>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+  <app-slideshow-poster [peliculas]="Populares"></app-slideshow-poster>
+
+
+<!--
   <swiper-container>
    @for (pelicula of peliculasReciente; track pelicula.id){
     <swiper-slide [slidesPerView]="1.1"  [spaceBetween]="10" [freeMode]="true">
@@ -8,4 +46,5 @@
     </swiper-slide>
    }
   </swiper-container>
+-->
 </ion-content>
