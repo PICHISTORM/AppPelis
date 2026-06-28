@@ -9,7 +9,7 @@
         <!-- 2 -->
         @for (pelicula of par; track pelicula.id) {
           <ion-col size="12">
-            <ion-card class="poster-card">
+            <ion-card class="poster-card" (click)="verDetalle(pelicula.id)">
               <img class="poster" [src]="pelicula.poster_path | imagen">
             </ion-card>
           </ion-col>

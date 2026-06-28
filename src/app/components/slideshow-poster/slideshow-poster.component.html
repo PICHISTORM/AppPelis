@@ -4,7 +4,7 @@
 
   @for (pelicula of peliculas; track pelicula.id) {
     <swiper-slide>
-      <ion-card>
+      <ion-card (click)="verDetalle(pelicula.id)">
         <img class="poster"
         [src]="pelicula.poster_path | imagen">
       </ion-card>

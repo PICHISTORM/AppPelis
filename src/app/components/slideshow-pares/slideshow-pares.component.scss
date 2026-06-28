@@ -3,9 +3,17 @@
 height: 300px;
 
 }
+
+.btn-mas{
+  position: relative;
+  top: 13%;
+}
+
 .col-mas {
   height: 100%; /* Clave: Asegura que la columna ocupe toda la altura */
+
   display: flex;
   align-items: center;
   justify-content: center;
 }
+

@@ -4,11 +4,12 @@ import { register } from 'swiper/element/bundle';
 register();
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ImagenPipe } from "../../pipes/imagen-pipe";
-import { IonButton, IonCard, IonIcon } from '@ionic/angular/standalone';
+import { IonButton, IonCard, IonIcon, ModalController } from '@ionic/angular/standalone';
 import { ParesPipe } from "../../pipes/pares-pipe";
 
 import { addIcons } from 'ionicons';
 import { add } from 'ionicons/icons';
+import { DetalleComponent } from '../detalle/detalle.component';
 
 @Component({
   selector: 'app-slideshow-pares',
@@ -21,7 +22,7 @@ import { add } from 'ionicons/icons';
 export class SlideshowParesComponent  implements OnInit {
     @Input() peliculas: Peliculas[] = [];
     @Output() cargarMas = new EventEmitter();
-  constructor() {
+  constructor(private modalCtrl: ModalController) {
     addIcons({ add });
   }
 
@@ -33,5 +34,13 @@ export class SlideshowParesComponent  implements OnInit {
     onClick(){
     this.cargarMas.emit();
   }
-
+    async verDetalle(id:number){
+      const modal = await this.modalCtrl.create({
+        component: DetalleComponent,
+        componentProps:{
+          id
+        }
+      });
+      modal.present();
+    }
 }
