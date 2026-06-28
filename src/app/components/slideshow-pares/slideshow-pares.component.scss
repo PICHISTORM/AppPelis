@@ -1,0 +1,11 @@
+.slide-mas {
+
+height: 300px;
+
+}
+.col-mas {
+  height: 100%; /* Clave: Asegura que la columna ocupe toda la altura */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

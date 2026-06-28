@@ -7,6 +7,11 @@ import { register } from 'swiper/element/bundle';
 import { ImagenPipe } from '../pipes/imagen-pipe';
 import { SlideshowBackdropComponent } from '../components/slideshow-backdrop/slideshow-backdrop.component';
 import { SlideshowPosterComponent } from '../components/slideshow-poster/slideshow-poster.component';
+import { SlideshowParesComponent } from '../components/slideshow-pares/slideshow-pares.component';
+import { ParesPipe } from '../pipes/pares-pipe';
+import { addIcons } from 'ionicons';
+import { add } from 'ionicons/icons';
+
 
 register();
 
@@ -15,7 +20,7 @@ register();
   standalone:true,
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent, ExploreContainerComponent,ImagenPipe,SlideshowBackdropComponent,SlideshowPosterComponent],
+  imports: [IonHeader, IonToolbar, IonTitle, IonContent, ExploreContainerComponent,ImagenPipe,SlideshowBackdropComponent,SlideshowPosterComponent,SlideshowParesComponent,ParesPipe],
   schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })
 export class Tab1Page implements OnInit{
@@ -24,7 +29,9 @@ export class Tab1Page implements OnInit{
 
   Populares: Peliculas[]=[];
 
-  constructor(private movies: Movies) {}
+  constructor(private movies: Movies) {
+    addIcons({ add });
+  }
 
   ngOnInit() {
     this.movies.getFeature()
@@ -34,10 +41,21 @@ export class Tab1Page implements OnInit{
 
       });
 
-      this.movies.getPopulares()
+      this.getPopulares();
+
+
+
+  }
+  cargarMas(){
+    this.getPopulares();
+  }
+
+  getPopulares(){
+    this.movies.getPopulares()
         .subscribe( (resp:RespuestaMDB)=>{
-          console.log('Populares',resp);
-          this.Populares = resp.results;
+          //console.log('Populares',resp);
+          const arrTemp = [...this.Populares, ...resp.results];
+          this.Populares=arrTemp;
         });
 
   }
