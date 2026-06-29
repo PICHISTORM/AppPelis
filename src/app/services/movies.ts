@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { RespuestaMDB } from '../interfaces/interfaces'; // Ajusta la ruta según donde esté
+import { PeliculaDetalle, RespuestaMDB, RespuestaCredits } from '../interfaces/interfaces'; // Ajusta la ruta según donde esté
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
@@ -27,7 +27,6 @@ export class Movies {
     return this.ejecutarQuery<RespuestaMDB>(`${ query }`);
   }
 
-
   getFeature(){
 
     const hoy = new Date();
@@ -43,6 +42,13 @@ export class Movies {
     const fin = `${ hoy.getFullYear() }-${ mesString }-${ ultimoDia }`;
 
     return this.ejecutarQuery<RespuestaMDB>(`/discover/movie?primary_release_date.gte=${inicio}&primary_release_date.lte=${fin}`);
+  }
+
+  getPeliculaDetalle(id:string){
+    return this.ejecutarQuery<PeliculaDetalle>(`/movie/${id}?a=1`);
+  }
+  getActoresPelicula(id:string){
+    return this.ejecutarQuery<RespuestaCredits>(`/movie/${id}/credits?a=1`);
   }
 
 }

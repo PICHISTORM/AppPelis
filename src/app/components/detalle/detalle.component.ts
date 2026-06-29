@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Movies } from '../../services/movies';
 
 @Component({
   selector: 'app-detalle',
@@ -9,10 +10,16 @@ export class DetalleComponent  implements OnInit {
 
   @Input() id!: number;
 
-  constructor() { }
+  constructor(private movies: Movies) { }
 
   ngOnInit() {
-    console.log('ID',this.id)
+
+    this.movies.getPeliculaDetalle(this.id.toString())
+      .subscribe(resp => {
+        console.log(resp);});
+    this.movies.getActoresPelicula(this.id.toString())
+      .subscribe(resp => {
+        console.log(resp);});
   }
 
 }
