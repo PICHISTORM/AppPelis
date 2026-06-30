@@ -1,27 +1,10 @@
-<!--
-<swiper-container>
-  @for (pelicula of peliculas; track pelicula.id) {
-    <swiper-slide [slidesPerView]="1.1" [spaceBetween]="10" [freeMode]="true">
-      <ion-card>
-        <img [src]="pelicula.backdrop_path | imagen" />
-      </ion-card>
-    </swiper-slide>
-  }
-</swiper-container>
-
-
--->
-
-<!-- Configuramos el contenedor con las opciones del slider -->
-
 <swiper-container slides-per-view="1.1" space-between="10" free-mode="true">
-
   @for (pelicula of peliculas; track pelicula.id) {
     <swiper-slide>
-      <ion-card  (click)="verDetalle(pelicula.id)">
-        <img [src]="pelicula.backdrop_path | imagen" />
+      <ion-card class="backdrop-card" (click)="verDetalle(pelicula.id)">
+        <img class="img-backdrop" [src]="pelicula.backdrop_path | imagen" />
       </ion-card>
     </swiper-slide>
   }
-
 </swiper-container>
+

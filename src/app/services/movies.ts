@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { PeliculaDetalle, RespuestaMDB, RespuestaCredits } from '../interfaces/interfaces'; // Ajusta la ruta según donde esté
+import { PeliculaDetalle, RespuestaMDB, RespuestaCredits } from '../interfaces/interfaces';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
