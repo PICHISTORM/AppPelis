@@ -12,6 +12,7 @@ const apiKey = environment.apiKey;
 export class Movies {
 
   private popularesPage = 0;
+  private generos: any[] = [];
 
   constructor( private http: HttpClient){ }
 
@@ -53,6 +54,22 @@ export class Movies {
   }
   getActoresPelicula(id:string){
     return this.ejecutarQuery<RespuestaCredits>(`/movie/${id}/credits?a=1`);
+  }
+
+  cargarGeneros(): Promise<any[]> {
+    if (this.generos.length > 0) {
+      return Promise.resolve(this.generos);
+    }
+
+    return new Promise(resolve => {
+      this.ejecutarQuery<{ genres?: any[] }>('/genre/movie/list?a=1').subscribe({
+        next: (resp) => {
+          this.generos = resp.genres ?? [];
+          resolve(this.generos);
+        },
+        error: () => resolve([]),
+      });
+    });
   }
 
 }
