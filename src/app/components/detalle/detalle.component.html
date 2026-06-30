@@ -113,11 +113,11 @@
       </ion-button>
       </ion-buttons>
 
-            <ion-buttons slot="start">
+      <ion-buttons slot="start">
         <ion-button (click)="favorito()">
-          <ion-icon slot="end" name="star-outline"></ion-icon>
-          <ion-label>Favorito</ion-label>
-      </ion-button>
+          <ion-icon slot="end" [name]="esFavorito ? 'star' : 'star-outline'"></ion-icon>
+          <ion-label>{{ esFavorito ? 'En favoritos' : 'Favorito' }}</ion-label>
+        </ion-button>
       </ion-buttons>
 
     </ion-toolbar>

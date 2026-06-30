@@ -8,8 +8,7 @@ import { register } from 'swiper/element/bundle';
 register();
 
 import { addIcons } from 'ionicons';
-import { thumbsUpOutline, peopleOutline,arrowBackCircleOutline, starOutline
- } from 'ionicons/icons';
+import { thumbsUpOutline, peopleOutline, arrowBackCircleOutline, starOutline, star } from 'ionicons/icons';
 import { DataLocalService } from 'src/app/services/data-local';
 
 @Component({
@@ -26,23 +25,25 @@ export class DetalleComponent  implements OnInit {
   pelicula?: PeliculaDetalle;
   actores: Cast[] = [];
   oculto: number = 150;
+  esFavorito = false;
 
-  constructor(private movies: Movies,
+  constructor(
+    private movies: Movies,
     private modalCtrl: ModalController,
     private dataLocal: DataLocalService,
   ) {
 
-    addIcons({ thumbsUpOutline, peopleOutline,arrowBackCircleOutline, starOutline });
+    addIcons({ thumbsUpOutline, peopleOutline, arrowBackCircleOutline, starOutline, star });
 
     }
 
-  ngOnInit() {
-
-
+  async ngOnInit() {
     this.movies.getPeliculaDetalle(this.id.toString())
-      .subscribe(resp => {
-        console.log(resp);
+      .subscribe(async resp => {
         this.pelicula = resp;
+        if (this.pelicula?.id) {
+          this.esFavorito = await this.dataLocal.esFavorita(this.pelicula.id);
+        }
       });
 
     this.movies.getActoresPelicula(this.id.toString())
@@ -62,9 +63,16 @@ export class DetalleComponent  implements OnInit {
 
   }
 
-async favorito() {
-  if (!this.pelicula) return;
-  await this.dataLocal.guardarPelicula(this.pelicula);
-}
+  async favorito() {
+    if (!this.pelicula?.id) return;
+
+    if (this.esFavorito) {
+      await this.dataLocal.eliminarPelicula(this.pelicula.id);
+    } else {
+      await this.dataLocal.guardarPelicula(this.pelicula);
+    }
+
+    this.esFavorito = await this.dataLocal.esFavorita(this.pelicula.id);
+  }
 
 }
