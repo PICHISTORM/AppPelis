@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonSearchbar, IonLabel, IonList, IonItem, IonListHeader, IonGrid, IonRow, IonSpinner, IonCol } from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
+import { Movies } from '../services/movies';
 
 @Component({
   selector: 'app-tab2',
@@ -34,11 +35,18 @@ export class Tab2Page {
     'Captain America'
   ];
 
+    constructor(private movies: Movies) {
+
+    }
+
+
   buscar($event: any) {
     const valor= $event.detail.value;
-    console.log(valor);
+    //console.log(valor);
+    this.movies.buscarPeliculas(valor).subscribe( resp => {
+      console.log(resp);
+    });
   }
 
-  constructor() {}
 
 }
