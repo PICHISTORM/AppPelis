@@ -17,6 +17,8 @@
 
 <ion-content>
 
+
+  @if(buscando){
   <ion-grid>
     <ion-row>
       <ion-col text="center">
@@ -27,10 +29,19 @@
 
     </ion-row>
   </ion-grid>
+  }
+
+
+
 
   <ion-list-header>
     <ion-label>Ideas</ion-label>
   </ion-list-header>
+
+
+  @if(peliculas.length===0){
+
+
   <ion-list>
 
 
@@ -45,5 +56,29 @@
 
 
   </ion-list>
+  }
+
+  <ion-grid fixed>
+    <ion-row>
+      @for(pelicula of peliculas;track pelicula){
+      <ion-col size="6">
+        <ion-card (click)="detalle(pelicula.id)">
+          <img [src]="pelicula.poster_path | imagen">
+
+          <ion-card-header>
+            <ion-card-subtitle>
+              {{pelicula.release_date}} </ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content>
+            <h2>{{pelicula.title}}</h2>
+          </ion-card-content>
+
+        </ion-card>
+      </ion-col>
+      }
+    </ion-row>
+  </ion-grid>
+
 </ion-content>
 

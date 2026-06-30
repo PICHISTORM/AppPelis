@@ -8,8 +8,9 @@ import { register } from 'swiper/element/bundle';
 register();
 
 import { addIcons } from 'ionicons';
-import { thumbsUpOutline, peopleOutline,arrowBackCircleOutline
+import { thumbsUpOutline, peopleOutline,arrowBackCircleOutline, starOutline
  } from 'ionicons/icons';
+import { DataLocalService } from 'src/app/services/data-local';
 
 @Component({
   selector: 'app-detalle',
@@ -28,9 +29,10 @@ export class DetalleComponent  implements OnInit {
 
   constructor(private movies: Movies,
     private modalCtrl: ModalController,
+    private dataLocal: DataLocalService,
   ) {
 
-    addIcons({ thumbsUpOutline, peopleOutline,arrowBackCircleOutline });
+    addIcons({ thumbsUpOutline, peopleOutline,arrowBackCircleOutline, starOutline });
 
     }
 
@@ -60,8 +62,9 @@ export class DetalleComponent  implements OnInit {
 
   }
 
-  favorito(){
-
-  }
+async favorito() {
+  if (!this.pelicula) return;
+  await this.dataLocal.guardarPelicula(this.pelicula);
+}
 
 }
